@@ -1,7 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .card {
+        border-radius: 16px;
+        border: 1px solid #e5e5e5;
+    }
+
+    .card-header {
+        border-bottom: 1px solid #e5e5e5;
+        padding: 18px 20px;
+        background: #fff;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .form-label {
+        font-weight: 600;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        transition: 0.15s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #495057;
+        box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.05);
+    }
+
+    .btn-primary, .btn-success, .btn-secondary {
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .btn-primary:hover, .btn-success:hover, .btn-secondary:hover {
+        opacity: 0.9;
+    }
+</style>
+
 <div class="container">
+    <div class="mb-3">
+        <a href="{{ route('lists.show', $list) }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Kembali ke List
+        </a>
+    </div>
+
     <div class="card">
         <div class="card-header">
             <h4>Tambah Task - {{ $list->name }}</h4>
@@ -9,6 +56,7 @@
         <div class="card-body">
             <form action="{{ route('tasks.store', $list) }}" method="POST">
                 @csrf
+
                 <div class="mb-3">
                     <label class="form-label">Nama Task *</label>
                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" 
@@ -43,7 +91,7 @@
 
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('lists.show', $list) }}" class="btn btn-secondary">Batal</a>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-success">Simpan Task</button>
                 </div>
             </form>
         </div>
